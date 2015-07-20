@@ -1,42 +1,62 @@
 <!DOCTYPE html>
+{% extends 'bootstrap_theme/starter.html' %}
 <html>
-	<head>
-		<meta charset="utf-8">
-		<title>YGO Deck Pricer</title>
-	</head>
-
-	<body>
-		{% if deck %}
-			{% if totals %}
-				<h3>Entire Deck:</h3>
-				<h4>Low price: <i>${{ totals.0 }}</i></h4>
-				<h4>Average price: <i>${{ totals.1 }}</i></h4>
-				<h4>High price: <i>${{ totals.2 }}</i></h4>
-				<h3>Card Breakdown:</h3>
-			{% endif %}
-			<table>
-			{% for card, value in deck.items %}
-				<tr><td  style="padding-right: 10px;">{{ value.4 }}x <b>{{ value.0 }}</b></td><td style="background-color: yellow; padding-right: 10px;">LOW: ${{ value.1 }}</td><td style="background-color: white; padding-right: 10px;">AVERAGE: ${{ value.2 }}</td><td style="background-color: #3399FF; padding-right: 10px;">HIGH: ${{ value.3 }}</td></tr>
-			{% endfor %}
-			</table>
+{% block branding %}Yu-Gi-Oh Deck Pricer{% endblock %}
+{% block title %}Yu-Gi-Oh Deck Pricer{% endblock %}
+ {% block navbar %}
+	<ul class="nav navbar-nav">
+		<li class="active"><a href="#">Upload</a></li>
+	</ul>
+{% endblock %}
+{% block content %}
+	{% if deck|length > 0  %}
+		{% if totals %}
+			<h3>Entire Deck:</h3>
+			<h4>Low price: <i>${{ totals.0 }}</i></h4>
+			<h4>Average price: <i>${{ totals.1 }}</i></h4>
+			<h4>High price: <i>${{ totals.2 }}</i></h4>
+			<h3>Card Breakdown:</h3>
 		{% endif %}
-		<p>Please upload a .ydk deck file and wait up to a minute.</p>
-		<!-- Upload form. Note enctype attribute! -->
-		<form action="{% url "list" %}" method="post" enctype="multipart/form-data">
-			{% csrf_token %}
-			<p>{{ form.non_field_errors }}</p>
-			<p>{{ form.docfile.label_tag }} {{ form.docfile.help_text }}</p>
-			<p>
-				{{ form.docfile.errors }}
-				{{ form.docfile }}
-			</p>
-			<p><input type="submit" value="Upload" /></p>
-		</form>
-		
-		<p>Work in progress!</p>
-		<p>Please note that only english release cards are supported, OCG cards will not be processed.</p>
-		<p>If you have any problems, email the .ydk file to <i>ceduff42@gmail.com</i></p>
-		
+		<table class="table table-condensed table-hover">
+			<th>Name</th><th>Low</th><th>Average</th><th>High</th>
+			{% for card, value in deck.items %}
+				<tr><td  style="padding-right: 10px;">{{ value.4 }}x <b>{{ value.0 }}</b></td><td style="background-color: yellow; padding-right: 10px;">${{ value.1 }}</td><td style="background-color: white; padding-right: 10px;">{{ value.2 }}</td><td style="background-color: #3399FF; padding-right: 10px;">${{ value.3 }}</td></tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	{% if extra|length > 0  %}
+		<h3>Extra Deck:</h3>
+		<table class="table table-condensed table-hover">
+			<th>Name</th><th>Low</th><th>Average</th><th>High</th>
+			{% for card, value in extra.items %}
+				<tr><td  style="padding-right: 10px;">{{ value.4 }}x <b>{{ value.0 }}</b></td><td style="background-color: yellow; padding-right: 10px;">${{ value.1 }}</td><td style="background-color: white; padding-right: 10px;">{{ value.2 }}</td><td style="background-color: #3399FF; padding-right: 10px;">${{ value.3 }}</td></tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+		{% if side|length > 0 %}
+		<h3>Side Deck:</h3>
+		<table class="table table-condensed table-hover">
+			<th>Name</th><th>Low</th><th>Average</th><th>High</th>
+			{% for card, value in side.items %}
+				<tr><td  style="padding-right: 10px;">{{ value.4 }}x <b>{{ value.0 }}</b></td><td style="background-color: yellow; padding-right: 10px;">${{ value.1 }}</td><td style="background-color: white; padding-right: 10px;">{{ value.2 }}</td><td style="background-color: #3399FF; padding-right: 10px;">${{ value.3 }}</td></tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	<br>
+	<p>Please upload a .ydk deck file and wait up to a minute.</p>
+	<!-- Upload form. Note enctype attribute! -->
+	<form action="{% url "list" %}" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+		{{ form.non_field_errors }}
+		{{ form.docfile.label_tag }} {{ form.docfile.help_text }}
+		{{ form.docfile.errors }}
+		<p>{{ form.docfile }}</p>
+		<p><input type="submit" value="Upload" class="btn btn-primary"/></p>
+	</form>
+	<p>Please note that only english release cards are supported, OCG cards will not be processed.</p>
+	<p>If you have any problems, email the .ydk file to <i>ceduff42@gmail.com</i></p>
+{% endblock %}
+	<body>
 		<script type="text/javascript">
 		var sc_project=10463207; 
 		var sc_invisible=1; 
@@ -51,7 +71,7 @@
 		statistics" href="http://statcounter.com/shopify/"
 		target="_blank"><img class="statcounter"
 		src="http://c.statcounter.com/10463207/0/0ae6c446/1/"
-		alt="shopify visitor statistics"></a></div></noscript>
+		alt="visitor statistics"></a></div></noscript>
 	</body>
-
+	 {% block footer %}<i>Ceduff</i> 2015{% endblock %}
 </html> 

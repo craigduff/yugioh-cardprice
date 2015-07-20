@@ -1,0 +1,7 @@
+Hello,
+
+  Welcome to Django site!  Click on the activation link below:
+  
+  http://{{site.domain}}{% url 'registration_activate' activation_key %}
+
+Best Regards,

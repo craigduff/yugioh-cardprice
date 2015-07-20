@@ -1,0 +1,10 @@
+{% for field in form %}
+<div id="grp_{{field.id_for_label}}" class="form-group{% if field.errors %} error{% endif %}">
+  {% if not field.is_hidden %}
+  <label for="{{field.id_for_label}}" class="col-lg-2 control-label">{{field.label}}</label>
+  {% endif %}
+  <div class="col-lg-10">{{field}}
+  {% if field.errors %}<p class="help-block">{% for err in field.errors %}{{err}}{% endfor %}</p>
+  {% else %}{% if field.help_text %}<p class="help-block">{{field.help_text}}</p>{% endif %}{% endif %}</div>
+</div>
+{% endfor %}

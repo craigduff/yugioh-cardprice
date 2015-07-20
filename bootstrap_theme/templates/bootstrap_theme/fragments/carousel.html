@@ -1,0 +1,18 @@
+    <div id="{{group_name}}" class="carousel slide">
+      <div class="carousel-inner">
+        {% for object in object_list %}
+        <div class="item{% if forloop.first %} active{% endif %}">
+          <img src="{{object.image.url}}" alt="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>{{object.caption}}</h1>
+              <p class="lead">{{object.lead}}</p>
+              <a class="btn btn-large btn-primary" href="{% if object.button_parameter %}{% url object.button_url object.button_parameter %}{% else %}{% url object.button_url %}{% endif %}">{{object.button_text}}</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <a class="left carousel-control" href="#{{group_name}}" data-slide="prev">&lsaquo;</a>
+      <a class="right carousel-control" href="#{{group_name}}" data-slide="next">&rsaquo;</a>
+    </div><!-- /.carousel -->

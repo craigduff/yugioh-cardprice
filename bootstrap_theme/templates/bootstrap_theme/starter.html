@@ -1,0 +1,52 @@
+{% extends 'bootstrap_theme/fluid.html' %}
+
+{% block css %}
+body {
+  padding-top: 50px;
+}
+.starter-template {
+  padding: 40px 15px;
+  text-align: center;
+}
+{% endblock %}
+
+{% block body %}
+    <div class="navbar {% block navbar_class %}navbar-inverse navbar-fixed-top{% endblock %}">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">{% block branding %}Project name{% endblock %}</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          {% block navbar %}
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+          {% endblock %}
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+
+    <div class="container">
+    {% include 'bootstrap_theme/fragments/messages.html' %}
+{% block content %}
+      <div class="starter-template">
+        <h1>Bootstrap starter template</h1>
+        <p>Use this document as a way to quick start any new project.<br> All you get is this message and a barebones HTML document.</p>
+      </div>
+{% endblock %}
+
+      <hr>
+
+      <footer>
+        {% block footer %}<p>&copy; Company 2013</p>{% endblock %}
+      </footer>
+
+    </div> <!-- /container -->
+{% endblock %}

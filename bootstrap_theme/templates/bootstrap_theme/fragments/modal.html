@@ -1,0 +1,19 @@
+<div id="{{modal_id}}" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{modal_id}}Label" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title" id="{{modal_id}}Label">{{title}}</h4>
+      </div>
+      {% if form_action %}<form action="{{form_action}}" method="post"><input type='hidden' name='csrfmiddlewaretoken' value='{{csrf_token}}' />{% endif %}
+      <div class="modal-body">
+        {{body}}
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">Close</button>
+        {% if form_action %}<input class="btn btn-primary" type="submit" value="Save changes">{% endif %}
+      </div>
+      {% if form_action %}</form>{% endif %}
+    </div>
+  </div>
+</div>

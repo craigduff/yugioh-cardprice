@@ -1,0 +1,14 @@
+      .navbar-inner {
+        background-color: #{{first_color}}; /* fallback color, place your own */
+
+      /* Gradients for modern browsers, replace as you see fit */
+      background-image: -moz-linear-gradient(top, #{{first_color}}, #{{last_color}});
+      background-image: -ms-linear-gradient(top, #{{first_color}}, #{{last_color}});
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#{{first_color}}), to(#{{last_color}}));
+      background-image: -webkit-linear-gradient(top, #{{first_color}}, #{{last_color}});
+      background-image: -o-linear-gradient(top, #{{first_color}}, #{{last_color}});
+      background-image: linear-gradient(top, #{{first_color}}, #{{last_color}});
+      background-repeat: repeat-x;
+
+      /* IE8-9 gradient filter */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{{first_color}}', endColorstr='#{{last_color}}', GradientType=0);

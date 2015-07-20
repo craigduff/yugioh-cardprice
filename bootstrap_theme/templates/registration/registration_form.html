@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Registration{% endblock %}
+
+{% block content %}
+      <div class="row-fluid">
+        <div class="span6">
+          <form class="form-horizontal" action="{% url 'registration_register' %}" method="post">{% csrf_token %}
+            <fieldset>
+              <legend>Registration form</legend>
+              {% include "bootstrap_form.html" %}
+              <button type="submit" class="btn btn-primary">Sign up</button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+{% endblock %}
